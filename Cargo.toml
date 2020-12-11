@@ -1,0 +1,13 @@
+[package]
+name = "custom_json_serializer"
+version = "0.1.0"
+authors = ["Chris <jck2000@gmx.de>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = {version = "*", features = ["derive"]}
+serde_json = "^1.0"
+itoa = "*"
+ryu = "*"
