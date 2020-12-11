@@ -58,7 +58,7 @@ impl<'a> Formatter for OpenStructures<'a> {
             W: ?Sized + io::Write,
     {
         if self.is_open() {
-            writer.write_all(b"\n");
+            writer.write_all(b"\n")?;
             self.print_indents_below(writer)?;
         }
         writer.write_all(b"]")?;
@@ -102,7 +102,7 @@ impl<'a> Formatter for OpenStructures<'a> {
             W: ?Sized + io::Write,
     {
         if self.is_open() {
-            writer.write_all(b"\n");
+            writer.write_all(b"\n")?;
             self.print_indents_below(writer)?;
         }
         writer.write_all(b"}")?;

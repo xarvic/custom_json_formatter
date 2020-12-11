@@ -67,7 +67,7 @@ fn main() -> Result<(), serde_json::Error> {
         &mut target,
         OpenStructures::new("  ", 5)
     );
-    value.serialize(&mut serializer);
+    value.serialize(&mut serializer)?;
     println!("{}", String::from_utf8(target).unwrap());
 
     Ok(())
