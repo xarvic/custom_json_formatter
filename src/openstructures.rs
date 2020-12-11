@@ -58,6 +58,7 @@ impl<'a> Formatter for OpenStructures<'a> {
             W: ?Sized + io::Write,
     {
         if self.is_open() {
+            writer.write_all(b"\n");
             self.print_indents_below(writer)?;
         }
         writer.write_all(b"]")?;
@@ -72,31 +73,14 @@ impl<'a> Formatter for OpenStructures<'a> {
         where
             W: ?Sized + io::Write,
     {
+        if !first {
+            writer.write_all(b", ")?;
+        }
         if self.is_open() {
-            if first {
-                writer.write(b"\n")?;
-            }
+            writer.write(b"\n")?;
             self.print_indents(writer)?;
         }
-        if first || self.is_open() {
-            Ok(())
-        } else {
-            writer.write_all(b", ")
-        }
-    }
-
-    /// Called after every array value.
-    #[inline]
-    fn end_array_value<W>(&mut self, writer: &mut W) -> io::Result<()>
-        where
-            W: ?Sized + io::Write,
-    {
-        if self.is_open() {
-            writer.write_all(b",\n")
-        } else {
-            Ok(())
-        }
-
+        Ok(())
     }
 
     /// Called before every object.  Writes a `{` to the specified
@@ -118,6 +102,7 @@ impl<'a> Formatter for OpenStructures<'a> {
             W: ?Sized + io::Write,
     {
         if self.is_open() {
+            writer.write_all(b"\n");
             self.print_indents_below(writer)?;
         }
         writer.write_all(b"}")?;
@@ -131,17 +116,14 @@ impl<'a> Formatter for OpenStructures<'a> {
         where
             W: ?Sized + io::Write,
     {
+        if !first {
+            writer.write_all(b", ")?;
+        }
         if self.is_open() {
-            if first {
-                writer.write(b"\n")?;
-            }
+            writer.write(b"\n")?;
             self.print_indents(writer)?;
         }
-        if first || self.is_open() {
-            Ok(())
-        } else {
-            writer.write_all(b", ")
-        }
+        Ok(())
     }
 
     #[inline]
@@ -150,18 +132,5 @@ impl<'a> Formatter for OpenStructures<'a> {
             W: ?Sized + io::Write,
     {
         writer.write_all(b": ")
-    }
-
-    /// Called after every object value.
-    #[inline]
-    fn end_object_value<W>(&mut self, writer: &mut W) -> io::Result<()>
-        where
-            W: ?Sized + io::Write,
-    {
-        if self.is_open() {
-            writer.write_all(b",\n")
-        } else {
-            Ok(())
-        }
     }
 }

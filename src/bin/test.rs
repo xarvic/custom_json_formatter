@@ -1,5 +1,5 @@
 use serde_json::Serializer;
-use custom_json_serializer::OpenStructures;
+use custom_json_formatter::OpenStructures;
 use serde::Serialize;
 
 #[derive(Serialize)]
