@@ -1,5 +1,5 @@
 [package]
-name = "custom_json_serializer"
+name = "custom_json_formatter"
 version = "0.1.0"
 authors = ["Chris <jck2000@gmx.de>"]
 edition = "2018"
